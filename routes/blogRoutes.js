@@ -110,6 +110,11 @@ router.post('/comment/:index', isAuthenticated, (req, res) => {
     const post = posts[index];
     const username = req.session.username; // Usuario autenticado
 
+    // Verificar si el array de comentarios existe, si no, inicializarlo
+    if (!post.comments) {
+        post.comments = [];
+    }
+
     // Crear el nuevo comentario
     const newComment = {
         author: username,
