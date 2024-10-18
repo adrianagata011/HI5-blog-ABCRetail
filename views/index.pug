@@ -1,0 +1,78 @@
+extends layout.pug
+
+block content
+  .container
+    h1.text-center Bienvenido al Blog de ABC Retail
+
+    ul.list-group.mt-4
+        h3.mb-3.ml-2 Crea tu post
+        li.list-group-item
+            .justify-content-between.align-items-center
+                form(action="/blog/create", method="POST")
+                    .form-group
+                        label(for="title") Título
+                        input.form-control(type="text", name="title", placeholder="Escribe el título", required)
+                    .form-group
+                        label(for="content") Contenido
+                        textarea.form-control(name="content", placeholder="Escribe el contenido", required)
+                    .form-group
+                    button.btn.btn-primary.mt-3.mx-2(type="submit") Publicar
+                    a.btn.btn-secondary.mt-3.mx-2(href="/") Cancelar
+                
+    //- Listado de publicaciones
+    ul.list-group.mt-4
+        each post in posts
+            li.list-group-item
+                .d-flex.justify-content-between.align-items-center
+                    h4.mb-0 #{post.title} - Autor: #{post.author}
+                    small.text-muted #{post.category}
+                p.mt-2 #{post.content}
+
+
+                //- Botones de reacción 
+                    .container
+                    button.btn.btn-outline-success.btn-sm.me-2.mx-2#btnLike
+                        i.fas.fa-thumbs-up
+                        |  Me gusta 
+                        //- span#like-counter 
+                    button.btn.btn-outline-danger.btn-sm.me-2.mx-2#btnDislike
+                        i.fas.fa-thumbs-down
+                        |  No me gusta 
+                        //- span#dislike-counter 
+                
+                    //- Enlaces para editar y eliminar, definir si: chequear/reubicar/eliminarlos
+                        a.btn.btn-sm.btn-outline-primary.me-2.mx-1(href=`/edit/${post.title}`) Editar
+                        a.btn.btn-sm.btn-outline-danger.me-2.mx-1(href=`/delete/${post.title}`) Eliminar
+                a.btn.btn-sm.btn-outline-info.mx-1(href=`/comment/${post.title}`) Comentar
+                
+                
+                
+
+                //- Comentarios existentes
+                .container.mt-2.mb-2 
+                    h5.mt-3 Comentarios
+                    if post.comments.length > 0
+                        ul.list-group.mt-4
+                            each newComment in post.comments
+                                li.list-group-item.border-top.pt-3.pb-3
+                                    p.mb-0 #{newComment.content}
+                                    p.mb-0 Autor: #{newComment.author} - #{newComment.date}
+                    else
+                        p.mt-2.mb-2 
+                            i Aún no hay comentarios.
+                            
+                    if post.author !== currentUser
+                        form.mt-2.mb-2(action=`/blog/comment/${index}`, method="POST")
+                                label(for="comment") Añadir comentario:
+                                textarea(name="comment", required)
+                                button.btn.btn-sm.btn-outline-info.mt-2(type="submit") Comentar
+                    else
+                        p.mt-2.mb-2 
+                            i No puedes agregar comentarios a tu propia publicación.
+                            
+                            form(action=`/blog/delete/${index}`, method="POST")
+                                button.btn.btn-sm.btn-outline-danger.me-2.mx-2(type="submit") Eliminar
+                            a.btn.btn-sm.btn-outline-primary.me-2.mx-2(href=`/blog/edit/${index}`, class="btn") Editar
+
+    //- posible href="/", ya que hasta ahora no funciona correctamente
+    a(href="/") Salir del Blog

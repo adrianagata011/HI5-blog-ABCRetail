@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    .card.mb-4
+        .card-body
+            h1.text-center Editar Publicación
+            form(action=`/blog/edit/${index}`, method="POST")
+                .form-group
+                label(for="title") Título
+                input.form-control(type="text", name="title", value=post.title, required)
+                .form-group
+                label(for="content") Contenido
+                textarea.form-control(name="content", required) #{post.content}
+                button.btn.mt-3.btn-primary(type="submit") Actualizar
+                a.btn.btn-secondary.mt-3(href="/user/posts") Cancelar
