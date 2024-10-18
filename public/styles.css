@@ -207,3 +207,7 @@ footer {
 .btn:hover {
     background-color: #0056b3;
 }
+
+.list-group-item + .list-group-item.fix-listgroupitem {
+    border-top-width: 1px !important;
+}

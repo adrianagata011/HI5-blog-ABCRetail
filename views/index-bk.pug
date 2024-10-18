@@ -14,15 +14,7 @@ block content
                     .form-group
                         label(for="content") Contenido
                         textarea.form-control(name="content", placeholder="Escribe el contenido", required)
-
                     .form-group
-                        .d-flex.align-items-center
-                            label(for="category" class="me-2") Selecciona una categoría:
-                            select(name="category" id="category" class="form-control w-50 ml-2")
-                                option(value="avisos") Avisos
-                                option(value="guias") Guias
-                                option(value="general") General
-
                     button.btn.btn-primary.mt-1.mb-2(type="submit") Publicar
                     a.btn.btn-secondary.mt-1.mb-2.mx-2(href="/") Cancelar
                 
@@ -60,6 +52,7 @@ block content
                                         else
                                             //- label(for="comment") Añadir comentario:
                                             textarea.form-control(type="text", name="comment", placeholder="Añadí tu comentario a esta publicación", required)
+
                                     .form-group
                                         button.btn.btn-primary.mt-2(type="submit") Comentar
                         

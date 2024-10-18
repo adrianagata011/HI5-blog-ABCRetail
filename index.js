@@ -26,9 +26,14 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/blog', blogRoutes);
 app.use('/user', userRoutes);
 
-// Página principal
+// Página principal antes
+// app.get('/', (req, res) => {
+//     res.render('login');
+// });
+
+// Página principal ahora ocultando el header en login
 app.get('/', (req, res) => {
-    res.render('login');
+    res.render('login', { hideHeader: true });
 });
 
 app.listen(PORT, () => {
