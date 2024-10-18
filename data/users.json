@@ -26,5 +26,9 @@
   {
     "username": "Usuario",
     "password": "user01"
+  },
+  {
+    "username": "user2",
+    "password": "1234"
   }
 ]

@@ -130,4 +130,21 @@ router.post('/comment/:index', isAuthenticated, (req, res) => {
     res.redirect('/blog/posts');
 });
 
+// Ruta para buscar publicaciones
+router.get('/search', (req, res) => {
+    const searchTerm = req.query.q; // Captura el término de búsqueda desde la query string
+    
+    if (!searchTerm) {
+        return res.status(400).send('Debe proporcionar un término de búsqueda');
+    }
+
+    const posts = loadPosts(); // Carga las publicaciones desde el archivo JSON
+    const filteredPosts = posts.filter(post => 
+        post.title.includes(searchTerm) || post.content.includes(searchTerm)
+    );
+
+    // Renderiza la vista con los resultados de la búsqueda
+    res.render('searchResults', { posts: filteredPosts });
+});
+
 module.exports = router;
