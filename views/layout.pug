@@ -1,5 +1,5 @@
 doctype html
-html
+html(lang="es")
     head
         title Bienvenidos a mi Blog Personal
         //- link(rel="stylesheet", href="/styles/styles.css") //-El estilo CSS rompe los demás estilos
@@ -17,24 +17,18 @@ html
                                     use(xlink:href="#bootstrap")
                             ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                                 li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/#") Avisos
+                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Avisos") Avisos
                                 li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="#") Guías
+                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Guias") Guías
                                 li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="#") General
-                                form.d-flex(role="search")
-                                    input.form-control.form-control-dark.text-bg-dark(type="search", placeholder="Buscar...", aria-label="Search")
+                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=General") General
+                                li
+                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/posts") Quitar filtros
+                                form.d-flex(action="/blog/search", method="get")
+                                    input.form-control.form-control-dark.text-bg-dark( name="q", type="text", placeholder="Buscar...", aria-label="Search" required)
                                     button.btn.btn-primary(type="submit") Buscar
-                            //- form.col-12.col-lg-auto.mb-3.mb-lg-0.me-lg-3(role="search")
-                            //-     input.form-control.form-control-dark.text-bg-dark(type="search", placeholder="Search...", aria-label="Search")
-                            //-     button.btn.mx-2.btn-warning(type="submit") Search
-                            //-.text-end
-                                //- a.btn.mx-2.btn-primary(href="/new") Crear nueva publicación
-                                //- a.btn.mx-2.btn-primary(href="/register") Registrarse
-                                //- a.btn.mx-2.btn-primary(href="/login") Iniciar sesión
 
-                                //- button.btn.btn-outline-dark.mr-2.me-2(type="button") Login
-                                //- button.btn.btn-warning(type="button") Sign-up
+
         main.container.my-5
             block content
                 if message

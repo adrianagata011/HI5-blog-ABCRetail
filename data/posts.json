@@ -1,7 +1,8 @@
 [
   {
     "title": "Sobre el desarrollo de nuestro blog interno en ABC Retail",
-    "content": "Queridos compañeros de ABC Retail, estamos todos invitados a expresar aquí nuestras inquietudes esta nueva herramienta que a partir de hoy tenemos a nuestra disposición. Todos los aportes que hagamos serán considerados y de suma importancia para la planificación de modificaciones y mejoras a esta nueva herramienta de comunicación que tenemos en la empresa",
+    "content": "Queridos compañeros de ABC Retail, estamos todos invitados a expresar aquí nuestras inquietudes esta nueva herramienta que a partir de hoy tenemos a nuestra disposición. Todos los aportes que hagamos serán considerados y de suma importancia para la planificación de modificaciones y mejoras a esta nueva herramienta de comunicación que\r\ntenemos en la empresa",
+    "category": "Avisos",
     "author": "Admin",
     "comments": [
       {
@@ -33,6 +34,7 @@
   },
   {
     "title": "Las herramientas de gestión de stock",
+    "category": "General",
     "content": "No sería de mayor prioridad mejorar las actuales herramientas de gestión del stock para no tener que estar saltando entre pantallas constantemente?",
     "author": "Richard",
     "comments": [
@@ -59,9 +61,17 @@
     ]
   },
   {
-    "title": "Prueba posteo 1",
-    "content": "Prueba de contenido posteo 1",
-    "author": "Usuario",
+    "title": "Sobre el uso del rotulador",
+    "content": "Deben ser utilizados exclusivamente para rotulador productos cuya superficie se pueda borrar con alcohol. De otro modo el producto no puede ser comercializado y sera descontado del sueldo de todo el personal de la tienda en parte iguales",
+    "category": "Guias",
+    "author": "Admin",
+    "comments": []
+  },
+  {
+    "title": "Vacaciones",
+    "content": "A alguien más le parece que sería buénisimo si pudieramos partir las vacaciones en tres en lugar de en dos?",
+    "category": "General",
+    "author": "Ezequiel",
     "comments": []
   }
 ]
