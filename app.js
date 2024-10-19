@@ -38,6 +38,13 @@ app.get('/', (req, res) => {
     res.render('login');
 });
 
+// Middleware para hacer disponible la variable currentUser entre las diferentes vistas
+// app.use((req, res, next) => {
+//     res.locals.currentUser = req.session.username || null;
+//     next();
+// });
+
+
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });

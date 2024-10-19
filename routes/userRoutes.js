@@ -19,6 +19,7 @@ router.get('/register', (req, res) => {
     res.render('register');
 });
 
+// LOGIN
 router.post('/login', (req, res) => {
     const { username, password } = req.body;
     const users = loadUsers();

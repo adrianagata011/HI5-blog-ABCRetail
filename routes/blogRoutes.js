@@ -186,7 +186,7 @@ router.get('/search', async (req, res) => {
         const arrayvacio = filteredPosts.length === 0 ? 1 : 0;
 
         // Renderiza la vista index.pug y pasa las publicaciones filtradas y la variable arrayvacio
-        res.render('index', { posts: filteredPosts, arrayvacio }); // Pasa posts y arrayvacio a la vista
+        res.render('index', { posts: filteredPosts, arrayvacio, currentUser: req.session.username }); // Pasa posts y arrayvacio a la vista
 
     
     } catch (err) {
@@ -213,8 +213,11 @@ router.get('/filter', async (req, res) => {
         // Filtra las publicaciones por categoría
         const filteredPosts = posts.filter(post => post.category === category);
         
-        // Renderiza la vista index.pug y pasa las publicaciones filtradas
-        res.render('index', { posts: filteredPosts });
+        // Renderiza la vista index.pug y pasa las publicaciones filtradas y la variable currentUser
+        res.render('index', { 
+            posts: filteredPosts,
+            currentUser: req.session.username // Asegúrate de pasar currentUser desde la sesión
+        });
     } catch (err) {
         // Manejo de errores al leer el archivo
         console.error(err); // Imprime el error en la consola para depuración
