@@ -30,5 +30,21 @@
   {
     "username": "user2",
     "password": "1234"
+  },
+  {
+    "username": "UserTest",
+    "password": "123456"
+  },
+  {
+    "username": "user8",
+    "password": "1234"
+  },
+  {
+    "username": "user9",
+    "password": "123456"
+  },
+  {
+    "username": "user10",
+    "password": "123456"
   }
 ]
