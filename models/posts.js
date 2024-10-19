@@ -1,4 +1,4 @@
-class Publicacion {
+class Posts {
     constructor(title, content, category, author) {
         this.title = title;
         this.content = content;
@@ -31,4 +31,4 @@ class Publicacion {
     }
 }
 
-module.exports = { Publicacion };
+module.exports = { Posts };
