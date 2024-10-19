@@ -33,7 +33,7 @@ router.get('/posts', isAuthenticated, (req, res) => {
 
 //CREAR una nueva publicación
 router.post('/create', isAuthenticated, (req, res) => {
-    const validCategories = ['avisos', 'guias', 'general'];
+    const validCategories = ['Avisos', 'Guias', 'General'];
     const { title, content, category } = req.body;
     
     // Verificar si la categoría es válida
