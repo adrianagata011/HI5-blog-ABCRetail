@@ -32,37 +32,97 @@ router.get('/posts', isAuthenticated, (req, res) => {
 });
 
 //CREAR una nueva publicación
+// router.post('/create', isAuthenticated, (req, res) => {
+//     const validCategories = ['Avisos', 'Guias', 'General'];
+//     const { title, content, category } = req.body;
+    
+//     // Verificar si la categoría es válida
+//     if (!validCategories.includes(category)) {
+//         return res.status(400).json({ error: 'No intentes jugar con el código' });
+//     }
+//     const posts = loadPosts();
+//     // Agregar el post con el autor sacado de la sesión
+//     posts.push({ title, content, category, author: req.session.username, comments: [] });
+//     savePosts(posts);
+//     res.redirect('/blog/posts');
+// });
+
 router.post('/create', isAuthenticated, (req, res) => {
     const validCategories = ['Avisos', 'Guias', 'General'];
     const { title, content, category } = req.body;
-    
+
     // Verificar si la categoría es válida
     if (!validCategories.includes(category)) {
         return res.status(400).json({ error: 'No intentes jugar con el código' });
     }
-    const posts = loadPosts();
-    // Agregar el post con el autor sacado de la sesión
-    posts.push({ title, content, category, author: req.session.username, comments: [] });
-    savePosts(posts);
-    res.redirect('/blog/posts');
+
+    // Envolver la operación en una promesa
+    Promise.resolve()
+        .then(() => {
+            const posts = loadPosts(); // Cargar las publicaciones desde posts.json
+            posts.push({ title, content, category, author: req.session.username, comments: [] }); // Agregar el post
+            savePosts(posts); // Guardar las publicaciones actualizadas
+        })
+        .then(() => {
+            res.redirect('/blog/posts'); // Redirigir después de que se haya guardado
+        })
+        .catch((error) => {
+            console.error('Error al crear la publicación:', error);
+            res.status(500).send('Hubo un error al crear la publicación');
+        });
 });
 
 // EDITAR PUBLICACION parte 1: Ruta para recuperar una publicación
+
+// router.get('/edit/:index', isAuthenticated, (req, res) => {
+//     const index = req.params.index;
+//     const posts = loadPosts();
+//     // Verificar si la publicación existe
+//     const post = posts[index];
+//     if (!post) {
+//         return res.status(404).send('La publicación no existe.');
+//     }
+//     const username = req.session.username;
+//     if (post.author === username) {
+//         res.render('edit', { post, index });
+//     } else {
+//         res.send('No tienes permiso para editar esta publicación.');
+//     }
+// });
+
 router.get('/edit/:index', isAuthenticated, (req, res) => {
     const index = req.params.index;
-    const posts = loadPosts();
-    // Verificar si la publicación existe
-    const post = posts[index];
-    if (!post) {
-        return res.status(404).send('La publicación no existe.');
-    }
-    const username = req.session.username;
-    if (post.author === username) {
-        res.render('edit', { post, index });
-    } else {
-        res.send('No tienes permiso para editar esta publicación.');
-    }
+
+    // Envolver la operación en una promesa
+    Promise.resolve()
+        .then(() => {
+            const posts = loadPosts(); // Cargar las publicaciones
+            const post = posts[index]; // Obtener la publicación por índice
+
+            // Verificar si la publicación existe
+            if (!post) {
+                return Promise.reject('La publicación no existe.'); // Rechazar la promesa si no existe la publicación
+            }
+
+            return post; // Retornar la publicación si existe
+        })
+        .then((post) => {
+            const username = req.session.username;
+
+            // Verificar si el autor es el usuario autenticado
+            if (post.author === username) {
+                res.render('edit', { post, index }); // Renderizar la vista de edición
+            } else {
+                res.send('No tienes permiso para editar esta publicación.');
+            }
+        })
+        .catch((error) => {
+            // Manejo de errores
+            console.error('Error:', error);
+            res.status(404).send(error); // Enviar mensaje de error
+        });
 });
+
 
 // EDITAR PUBLICACION parte 2: Ruta para actualizar una publicación
 router.post('/edit/:index', isAuthenticated, (req, res) => {
