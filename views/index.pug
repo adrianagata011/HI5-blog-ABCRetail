@@ -50,19 +50,18 @@ block content
                                 i Aún no hay comentarios.
                                 
                         if post.author !== currentUser
-                            form para añadir comentario a post de otro autor
-                                ul.list-group.mt-4
-                                    li.list-group-item
-                                        .justify-content-between.align-items-center
-                                        form.mt-2.mb-2(action=`/blog/comment/${index}`, method="POST")
-                                            .form-group
-                                                if post.comments.length == 0
-                                                    textarea.form-control(type="text", name="comment", placeholder="Sé el primero en comentar esta publicación", required)
-                                                else
-                                                    //- label(for="comment") Añadir comentario:
-                                                    textarea.form-control(type="text", name="comment", placeholder="Añadí tu comentario a esta publicación", required)
-                                            .form-group
-                                                button.btn.btn-primary.mt-2(type="submit") Comentar
+                            ul.list-group.mt-4
+                                li.list-group-item
+                                    .justify-content-between.align-items-center
+                                    form.mt-2.mb-2(action=`/blog/comment/${index}`, method="POST")
+                                        .form-group
+                                            if post.comments.length == 0
+                                                textarea.form-control(type="text", name="comment", placeholder="Sé el primero en comentar esta publicación", required)
+                                            else
+                                                //- label(for="comment") Añadir comentario:
+                                                textarea.form-control(type="text", name="comment", placeholder="Añadí tu comentario a esta publicación", required)
+                                        .form-group
+                                            button.btn.btn-primary.mt-2(type="submit") Comentar
                         else
                             p.mt-2.mb-2 
                                 i No puedes agregar comentarios a tu propia publicación.
