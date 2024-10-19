@@ -80,4 +80,63 @@ router.get('/posts/filter', isAuthenticated, (req, res) => {
     res.status(200).json({ posts: filteredPosts });
 });
 
+// API: Editar una publicación
+router.put('/posts/:index', isAuthenticated, (req, res) => {
+    const index = req.params.index;
+    const { title, content, category } = req.body;
+    const validCategories = ['Avisos', 'Guias', 'General'];
+
+    // Cargar las publicaciones
+    const posts = loadPosts();
+    const post = posts[index];
+
+    // Verificar si la publicación existe
+    if (!post) {
+        return res.status(404).json({ error: 'La publicación no existe.' });
+    }
+
+    // Verificar si el usuario es el autor de la publicación
+    if (post.author !== req.session.username) {
+        return res.status(403).json({ error: 'No tienes permiso para editar esta publicación.' });
+    }
+
+    // Validar categoría
+    if (category && !validCategories.includes(category)) {
+        return res.status(400).json({ error: 'Categoría no válida' });
+    }
+
+    // Actualizar los campos de la publicación
+    if (title) post.title = title;
+    if (content) post.content = content;
+    if (category) post.category = category;
+
+    // Guardar las publicaciones actualizadas
+    savePosts(posts);
+
+    res.status(200).json({
+        message: 'Publicación editada exitosamente',
+        post: post
+    });
+});
+
+// API: Listar publicaciones con índices
+router.get('/posts', isAuthenticated, (req, res) => {
+    const posts = loadPosts(); // Cargar publicaciones desde el archivo JSON
+
+    // Mapear las publicaciones para devolver el índice junto con los datos
+    const postsWithIndex = posts.map((post, index) => ({
+        index: index,
+        title: post.title,
+        author: post.author,
+        category: post.category,
+        commentsCount: post.comments.length
+    }));
+
+    res.status(200).json({
+        message: 'Publicaciones encontradas',
+        posts: postsWithIndex
+    });
+});
+
+
 module.exports = router;
