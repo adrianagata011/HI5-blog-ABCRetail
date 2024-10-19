@@ -26,6 +26,19 @@ const userRoutes = require('./routes/userRoutes');
 app.use('/blog', blogRoutes);
 app.use('/user', userRoutes);
 
+// Listar todas las rutas registradas
+app._router.stack.forEach(function(r) {
+    if (r.route && r.route.path) {
+        console.log('Ruta activa:', r.route.path);
+    } else if (r.name === 'router' && r.handle.stack) {
+        r.handle.stack.forEach(function(handler) {
+        if (handler.route && handler.route.path) {
+            console.log('Ruta activa (router):', handler.route.path);
+        }
+        });
+    }
+    });
+
 // inicia bloque de la API
 // Importar las rutas de la API
 const postsApi = require('./api/postsApi');
