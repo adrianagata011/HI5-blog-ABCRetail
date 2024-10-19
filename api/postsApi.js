@@ -5,7 +5,7 @@ const { isAuthenticated } = require('../middlewares/authMiddleware');
 
 // API: Crear una nueva publicación
 router.post('/posts', isAuthenticated, (req, res) => {
-    const validCategories = ['avisos', 'guias', 'general'];
+    const validCategories = ['Avisos', 'Guias', 'General'];
     const { title, content, category } = req.body;
 
     // Verificar si la categoría es válida

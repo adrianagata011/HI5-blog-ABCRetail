@@ -95,7 +95,7 @@ router.post('/edit/:index', isAuthenticated, (req, res) => {
 });
 
 // ELIMINAR una publicación
-router.post('/delete/:index', isAuthenticated, (req, res) => {
+router.delete('/delete/:index', isAuthenticated, (req, res) => {
     const index = req.params.index;
     const posts = loadPosts();
 
