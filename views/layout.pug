@@ -8,31 +8,32 @@ html(lang="es")
         link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css")
         link(rel="icon", href="icono_pagina.ico", type="image/x-icon")
     body
-        if !hideHeader
+        if currentUser
             header.p-3.text-bg-dark
-                    nav.container
-                        .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
-                            a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href="/")
-                                svg.bi.me-2(width="40", height="32", role="img", aria-label="Bootstrap")
-                                    use(xlink:href="#bootstrap")
-                            ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
-                                li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Avisos") Avisos
-                                li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Guias") Guías
-                                li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=General") General
-                                li
-                                    a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/posts") Quitar filtros
-                                form.d-flex(action="/blog/search", method="get")
-                                    input.form-control.form-control-dark.text-bg-dark( name="q", type="text", placeholder="Buscar...", aria-label="Search" required)
-                                    button.btn.btn-primary(type="submit") Buscar
+                nav.container
+                    .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
+                        a.d-flex.align-items-center.mb-2.mb-lg-0.text-white.text-decoration-none(href="/")
+                            svg.bi.me-2(width="40", height="32", role="img", aria-label="Bootstrap")
+                                use(xlink:href="#bootstrap")
+                        ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
+                            li
+                                a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Avisos") Avisos
+                            li
+                                a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=Guias") Guías
+                            li
+                                a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/filter?category=General") General
+                            li
+                                a.btn.btn-sm.btn-outline-primary.py-2.px-4.mx-2.text-blue(href="/blog/posts") Quitar filtros
+                            form.d-flex(action="/blog/search", method="get")
+                                input.form-control.form-control-dark.text-bg-dark( name="q", type="text", placeholder="Buscar...", aria-label="Search" required)
+                                button.btn.btn-primary(type="submit") Buscar
 
 
         main.container.my-5
+            if message
+                p(class=messageType) #{message}
             block content
-                if message
-                    p(class=messageType) #{message}
+
         footer.py-3.my-4
             //- ul.nav.justify-content-center.border-bottom.pb-3.mb-3
             //-     li.nav-item

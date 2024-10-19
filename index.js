@@ -35,7 +35,7 @@ app.use('/api', postsApi);
 
 // Página principal ahora ocultando el header en login
 app.get('/', (req, res) => {
-    res.render('login', { hideHeader: true });
+    res.render('login');
 });
 
 app.listen(PORT, () => {

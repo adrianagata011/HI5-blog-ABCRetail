@@ -37,16 +37,25 @@ router.post('/register', (req, res) => {
     const { newUsername, newPassword } = req.body;
     const users = loadUsers();
 
+    // Verificar si el usuario ya existe
     const existingUser = users.find(u => u.username === newUsername);
     if (existingUser) {
         return res.render('register', { message: 'El usuario ya existe', messageType: 'error' });
     }
 
+    // Agregar el nuevo usuario a la lista
     users.push({ username: newUsername, password: newPassword });
     saveUsers(users);
-    res.render('login', { message: 'Usuario registrado', messageType: 'success' });
+
+    // Iniciar sesión automáticamente tras el registro
+    req.session.username = newUsername;
+
+    // Redirigir al index como si hubiera hecho un login exitoso
+    const posts = loadPosts();
+    res.render('index', { posts: loadPosts(), currentUser: newUsername });
 });
 
+// CERRAR sesion
 router.get('/logout', (req, res) => {
     req.session.destroy(); // Elimina la sesión
     res.redirect('/');
