@@ -1,8 +1,8 @@
 [
   {
-    "title": "Sobre el desarrollo de nuestro blog interno en ABC Retail",
-    "content": "Queridos compañeros de ABC Retail, estamos todos invitados a expresar aquí nuestras inquietudes esta nueva herramienta que a partir de hoy tenemos a nuestra disposición. Todos los aportes que hagamos serán considerados y de suma importancia para la planificación de modificaciones y mejoras a esta nueva herramienta de comunicación que\r\ntenemos en la empresa",
-    "category": "Avisos",
+    "title": "Sobre el desarrollo de nuestro blog interno en ABC Retail 1",
+    "content": ". Queridos compañeros de ABC Retail, estamos todos invitados a expresar aquí nuestras inquietudes esta nueva herramienta que a partir de hoy tenemos a nuestra disposición. Todos los aportes que hagamos serán considerados y de suma importancia para la planificación de modificaciones y mejoras a esta nueva herramienta de comunicación que\r\ntenemos en la empresa",
+    "category": "Guias",
     "author": "Admin",
     "comments": [
       {
@@ -66,13 +66,6 @@
     ]
   },
   {
-    "title": "(Actualizado) Sobre el uso del rotulador",
-    "content": "(Actualizado)  Deben ser utilizados exclusivamente para rotulador productos cuya superficie se pueda borrar con alcohol. De otro modo el producto no puede ser comercializado y sera descontado del sueldo de todo el personal de la tienda en parte iguales.",
-    "category": "Guias",
-    "author": "Admin",
-    "comments": []
-  },
-  {
     "title": "Vacaciones",
     "content": "A alguien más le parece que sería buénisimo si pudieramos partir las vacaciones en tres en lugar de en dos?",
     "category": "General",
@@ -82,6 +75,11 @@
         "author": "Admin",
         "content": "Interesante planteo Ezequiel. Pasa por RRHH a ver tu liquidacion.",
         "date": "10/19/2024, 12:15:42 AM"
+      },
+      {
+        "author": "Admin",
+        "content": "sdfasfdsafa",
+        "date": "10/19/2024, 8:41:08 PM"
       }
     ]
   },
@@ -90,6 +88,32 @@
     "content": "sdfasdf",
     "category": "Avisos",
     "author": "Admin",
+    "comments": [
+      {
+        "author": "Admin",
+        "content": "sdfasdfas",
+        "date": "10/20/2024, 1:49:13 AM"
+      }
+    ]
+  },
+  {
+    "title": "dsfasfdsaf",
+    "content": "asfasdfas",
+    "category": "Guias",
+    "author": "Admin",
     "comments": []
+  },
+  {
+    "title": "sdfsdfas",
+    "content": "sdfasd",
+    "category": "Avisos",
+    "author": "Admin",
+    "comments": [
+      {
+        "author": "Admin",
+        "content": "sdfasdfa",
+        "date": "10/20/2024, 1:49:28 AM"
+      }
+    ]
   }
 ]
