@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .card.mb-4
+        .card-body
+            h1.text-center Iniciar Sesión
+            form(action="/user/login", method="POST")
+                .form-group
+                label(for="username") Usuario
+                input.form-control(type="text", name="username", placeholder="Usuario", required)
+                .form-group
+                label(for="password") Contraseña
+                input.form-control(type="password", name="password", placeholder="Contraseña", required)
+                
+                button.mt-3.btn.btn-primary.mx-2(type="submit") Iniciar Sesión
+                a.btn.btn-secondary.mt-3.mx-2(href="/user/register", stype="button") Regístrate

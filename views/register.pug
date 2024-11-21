@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    .card.mb-4
+        .card-body
+            h1.text-center Registro
+            form(action="/user/register", method="POST")
+                .form-group
+                label(for="newUsername") Usuario
+                input.form-control(type="text", name="newUsername", placeholder="Usuario", required)
+                .form-group
+                label(for="newPassword") Contraseña
+                input.form-control(type="password", name="newPassword", placeholder="Contraseña", required)
+                button.mt-3.btn.btn-primary.mx-2(type="submit") Registrarse
+                
+                a.btn.btn-secondary.mt-3.mx-2(href="/", style="button") Regresar

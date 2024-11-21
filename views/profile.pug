@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .container
+        h1.text-center Perfil de Usuario
+        p Nombre de usuario: #{user.username}
+        form(action="/update-password", method="POST")
+        .form-group
+            label(for="password") Nueva Contraseña
+            input.form-control(type="password", name="password", placeholder="Escribe la nueva contraseña", required)
+        button.btn.btn-primary.mt-3(type="submit") Actualizar contraseña
+        a.btn.btn-secondary.mt-3(href='/') Volver a la página principal

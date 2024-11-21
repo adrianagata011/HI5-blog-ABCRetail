@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    .container
+        h1.text-center Publicaciones en #{category}
+        ul.list-group
+        each post in posts
+            li.list-group-item
+            h5.mb-0 #{post.title}
+            p.mt-2 #{post.content}
+            small.text-muted #{post.author} - #{post.category}
