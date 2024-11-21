@@ -15,6 +15,7 @@
     "express-session": "^1.18.1",
     "fs-extra": "^11.2.0",
     "mongodb": "^6.10.0",
+    "mongoose": "^8.8.2",
     "pug": "^3.0.3"
   }
 }
