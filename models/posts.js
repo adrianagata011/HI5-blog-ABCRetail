@@ -1,34 +1,23 @@
-class Posts {
-    constructor(title, content, category, author) {
-        this.title = title;
-        this.content = content;
-        this.category = category;
-        this.author = author;
-        this.comments = [];
-        this.createdAt = new Date();
-    }
+const mongoose = require('mongoose');
 
-    // Método para agregar un comentario
-    agregarComentario(comment) {
-        this.comments.push(comment);
-    }
+// Definir el esquema de comentario
+const commentSchema = new mongoose.Schema({
+    author: { type: String, required: true },
+    content: { type: String, required: true },
+    date: { type: Date, default: Date.now }
+});
 
-    // Método para actualizar el contenido de la publicación
-    actualizarContenido(nuevoContenido) {
-        this.content = nuevoContenido;
-    }
+// Definir el esquema de post
+const postSchema = new mongoose.Schema({
+    title: { type: String, required: true },
+    content: { type: String, required: true },
+    category: { type: String, required: true },
+    author: { type: String, required: true },
+    comments: [commentSchema], // Relacionar comentarios con publicaciones
+    createdAt: { type: Date, default: Date.now }
+});
 
-    // Método para obtener la información de la publicación
-    obtenerInfo() {
-        return {
-            title: this.title,
-            content: this.content,
-            category: this.category,
-            author: this.author,
-            comments: this.comments,
-            createdAt: this.createdAt
-        };
-    }
-}
+// Crear el modelo de post
+const Post = mongoose.model('Post', postSchema);
 
-module.exports = { Posts };
+module.exports = Post;

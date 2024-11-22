@@ -1,64 +1,69 @@
 const express = require('express');
 const router = express.Router();
-const bodyParser = require('body-parser');
-const fs = require('fs-extra');
 const session = require('express-session');
+const User = require('../models/users');
 
-// Configuración de las sesiones
+// Configuración de sesiones
 router.use(session({
-    secret: 'tuClaveSecreta', // Cambia esto por una clave secreta que solo tú conozcas
-    resave: false, // No volver a guardar la sesión si no ha cambiado
-    saveUninitialized: false, // No crear sesiones vacías
-    cookie: { secure: false } // Debe ser true si usas HTTPS
+    secret: 'tuClaveSecreta',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false }
 }));
 
-// Importar las funciones del archivo utils.js
-const { loadPosts, loadUsers, savePosts, saveUsers } = require('../utils/utils');
-
+// Ruta para mostrar el formulario de registro
 router.get('/register', (req, res) => {
     res.render('register');
 });
 
-// LOGIN
-router.post('/login', (req, res) => {
-    const { username, password } = req.body;
-    const users = loadUsers();
-    const user = users.find(u => u.username === username && u.password === password);
-
-    if (user) {
-        req.session.username = username;
-        const posts = loadPosts();
-        res.render('index', { posts: loadPosts(), currentUser: username });
-    } else {
-        res.render('login', { message: 'Usuario o contraseña incorrectos', messageType: 'error' });
-    }
-});
-
-router.post('/register', (req, res) => {
+// Ruta para procesar el registro
+router.post('/register', async (req, res) => {
     const { newUsername, newPassword } = req.body;
-    const users = loadUsers();
+    try {
+        const existingUser = await User.findOne({ username: newUsername });
+        if (existingUser) {
+            return res.render('register', { message: 'El usuario ya existe', messageType: 'error' });
+        }
 
-    // Verificar si el usuario ya existe
-    const existingUser = users.find(u => u.username === newUsername);
-    if (existingUser) {
-        return res.render('register', { message: 'El usuario ya existe', messageType: 'error' });
+        const newUser = new User({ username: newUsername, password: newPassword });
+        await newUser.save();
+
+        req.session.username = newUsername;
+        res.redirect('/blog/posts');
+    } catch (error) {
+        console.error('Error al registrar usuario:', error);
+        res.status(500).send('Error del servidor');
     }
-
-    // Agregar el nuevo usuario a la lista
-    users.push({ username: newUsername, password: newPassword });
-    saveUsers(users);
-
-    // Iniciar sesión automáticamente tras el registro
-    req.session.username = newUsername;
-
-    // Redirigir al index como si hubiera hecho un login exitoso
-    const posts = loadPosts();
-    res.render('index', { posts: loadPosts(), currentUser: newUsername });
 });
 
-// CERRAR sesion
+// Ruta para procesar el inicio de sesión
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+
+        const user = await User.findOne({ username });
+        if (user && await user.verificarPassword(password)) {
+            req.session.username = username;
+
+            // Autorización de Administrador
+            if (user.role) {
+                req.session.role = user.role;
+            }
+
+            res.redirect('/blog/posts');
+        } else {
+            res.render('login', { message: 'Usuario o contraseña incorrectos', messageType: 'error' });
+        }
+
+    } catch (error) {
+        console.error('Error al iniciar sesión:', error);
+        res.status(500).send('Error del servidor');
+    }
+});
+
+// Ruta para cerrar sesión
 router.get('/logout', (req, res) => {
-    req.session.destroy(); // Elimina la sesión
+    req.session.destroy();
     res.redirect('/');
 });
 

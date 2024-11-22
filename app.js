@@ -2,15 +2,19 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs-extra');
 const session = require('express-session');
+const connectDB = require('./routes/db');
 const app = express();
 const PORT = 3000;
+
+// Conectar a MongoDB
+connectDB();
 
 app.set('view engine', 'pug');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public')); // Servir archivos estáticos
 
 // Importar middleware de autenticación a nivel global
-const { isAuthenticated } = require('./middlewares/authMiddleware');
+//const { isAuthenticated } = require('./middlewares/authMiddleware');
 
 // Configuración de las sesiones
 app.use(session({
