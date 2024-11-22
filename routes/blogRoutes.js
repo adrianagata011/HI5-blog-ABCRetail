@@ -23,7 +23,8 @@ router.get('/posts', async (req, res) => {
     try {
         const posts = await Post.find(); // Cargar todas las publicaciones de MongoDB
         const currentUser = req.session.username;
-        res.render('index', { posts, currentUser });
+        const role = req.session.role;
+        res.render('index', { posts, currentUser, role });
     } catch (error) {
         console.error('Error al obtener las publicaciones:', error);
         res.status(500).send('Error al obtener las publicaciones');

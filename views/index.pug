@@ -59,7 +59,7 @@ block content
                                             textarea.form-control(type="text", name="comment", placeholder="Añadí tu comentario a esta publicación", required)
                                         .form-group
                                             button.btn.btn-primary.mt-2(type="submit") Comentar
-                        if post.author == currentUser                                
+                        if post.author == currentUser || role == '1'                              
                             .mt-4.justify-content-between.align-items-center
                                 //- botones para editar o eliminar el post propio
                                 form(action=`/blog/delete/${post._id}`, method="POST")
