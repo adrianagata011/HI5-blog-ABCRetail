@@ -33,12 +33,13 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Rutas
-const blogRoutes = require('./routes/blogRoutes');
-const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/auth');
-app.use('/blog', blogRoutes);
-app.use('/user', userRoutes);
+const blogRoutes = require('./routes/blogRoutes');
+// const userRoutes = require('./routes/userRoutes');
 app.use('/auth', authRoutes);
+app.use('/blog', blogRoutes);
+// app.use('/user', userRoutes);
+
 
 // Listar todas las rutas registradas
 app._router.stack.forEach(function(r) {

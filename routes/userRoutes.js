@@ -37,7 +37,7 @@ router.post('/register', async (req, res) => {
 });
 
 // Ruta para procesar el inicio de sesión
-router.post('/login', async (req, res) => {
+router.post('/auth/login', async (req, res) => {
     const { username, password } = req.body;
     try {
 
