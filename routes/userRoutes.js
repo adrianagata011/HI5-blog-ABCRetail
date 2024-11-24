@@ -40,13 +40,21 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
+
         const user = await User.findOne({ username });
         if (user && await user.verificarPassword(password)) {
             req.session.username = username;
+
+            // Autorización de Administrador
+            if (user.role) {
+                req.session.role = user.role;
+            }
+
             res.redirect('/blog/posts');
         } else {
             res.render('login', { message: 'Usuario o contraseña incorrectos', messageType: 'error' });
         }
+
     } catch (error) {
         console.error('Error al iniciar sesión:', error);
         res.status(500).send('Error del servidor');
