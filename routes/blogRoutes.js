@@ -70,7 +70,7 @@ router.get('/edit/:id', async (req, res) => {
             return res.status(404).send('La publicación no existe.');
         }
 
-        if (post.author !== req.session.username) {
+        if (post.author !== req.session.username && req.session.role != '1') {
             return res.status(403).send('No tienes permiso para editar esta publicación.');
         }
 
@@ -96,7 +96,7 @@ router.post('/edit/:id', async (req, res) => {
             return res.status(404).send('La publicación no existe.');
         }
 
-        if (post.author !== req.session.username) {
+        if (post.author !== req.session.username && req.session.role != '1') {
             return res.status(403).send('No tienes permiso para editar esta publicación.');
         }
 
@@ -123,7 +123,7 @@ router.post('/delete/:id', async (req, res) => {
             return res.status(404).send('La publicación no existe.');
         }
 
-        if (post.author !== req.session.username) {
+        if (post.author !== req.session.username && req.session.role != '1') {
             return res.status(403).send('No tienes permiso para eliminar esta publicación.');
         }
 
