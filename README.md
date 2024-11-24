@@ -35,7 +35,7 @@ node bin/www
 
 link: https://www.mongodb.com/products/platform/atlas-database
 Usuario: dsw.back@gmail.com
-Contraseña: desarrollo.web.back
+Contraseña: kChXw6AVAZCG$9r --> Anterior: desarrollo.web.back
 
 Usuario de la base:
 Usuario: dswback
