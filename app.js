@@ -3,8 +3,13 @@ const bodyParser = require('body-parser');
 const fs = require('fs-extra');
 const session = require('express-session');
 const connectDB = require('./routes/db');
+const passport = require('./middlewares/passportConfig');
+
 const app = express();
 const PORT = 3000;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Conectar a MongoDB
 connectDB();
@@ -18,17 +23,22 @@ app.use(express.static('public')); // Servir archivos estáticos
 
 // Configuración de las sesiones
 app.use(session({
-    secret: 'tuClaveSecreta', // Cambia esto por una clave secreta que solo tú conozcas
-    resave: false, // No volver a guardar la sesión si no ha cambiado
-    saveUninitialized: false, // No crear sesiones vacías
-    cookie: { secure: false } // Debe ser true si usas HTTPS
+    secret: 'tuClaveSecreta',
+    resave: false, 
+    saveUninitialized: false, 
+    cookie: { secure: false } 
 }));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Rutas
 const blogRoutes = require('./routes/blogRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/auth');
 app.use('/blog', blogRoutes);
 app.use('/user', userRoutes);
+app.use('/auth', authRoutes);
 
 // Listar todas las rutas registradas
 app._router.stack.forEach(function(r) {
